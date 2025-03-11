@@ -1,66 +1,36 @@
-
-/**
- * Represents a card in the game 
- */
 public class Carte {
-    private int id;
-    private boolean retournee;
-    private boolean gagnee;
+    private String valeur; // L'image représentée sur la carte
+    private boolean estVisible; // true si la carte est face visible, false sinon
 
     /**
-     * Card constructor 
-     * @param id the id of the card
+     * Constructeur de la classe Carte.
+     * @param valeur La valeur (image) de la carte.
      */
-    public Carte(int id) {
-        this.id = id;
-        this.retournee = false;
-        this.gagnee = false;
+    public Carte(String valeur) {
+        this.valeur = valeur;
+        this.estVisible = false; // Par défaut, la carte est face cachée
     }
 
     /**
-     * Returns the id of the card
-     * @return the id of the card
+     * Retourne la valeur de la carte.
+     * @return La valeur de la carte.
      */
-    public int getId() {
-        return id;
+    public String getValeur() {
+        return valeur;
     }
 
     /**
-     * Returns true if the card has been flipped, false otherwise.
-     * @return true if the card is flipped. false otherwise
+     * Vérifie si la carte est face visible.
+     * @return true si la carte est face visible, false sinon.
      */
-    public boolean estRetournee() {
-        return retournee;
+    public boolean estVisible() {
+        return estVisible;
     }
 
     /**
-     * Returns true if the couple has been found, false otherwise
-     * @return true if the same image couple has been found, flase otherwise
-     * 
-     */
-    public boolean estGagnee() {
-        return gagnee;
-    }
-
-    /**
-     * Flips the card
+     * Retourne la carte (change son état).
      */
     public void retourner() {
-        retournee = true;
+        estVisible = !estVisible;
     }
-
-    /**
-     * Flips the card face down
-     */
-    public void retournerFaceCachee() {
-        retournee = false;
-    }
-
-    /**
-     * Defines the card's winning status by passing ti tas a parameter
-     */
-    public void setGagnee(boolean gagnee) {
-        this.gagnee = gagnee;
-    }
-    
 }
