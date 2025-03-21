@@ -21,7 +21,7 @@ public class DecouvreImage {
     }
 }
 
-class UneImage extends JButton implements MouseListener {
+class UneImage extends JButton implements MouseListener, ActionListener{
     private static final ImageIcon[] TABIMAGES = {
         new ImageIcon("bin/images/Bird.gif"),
         new ImageIcon("bin/images/Bird2.gif"),
@@ -35,26 +35,48 @@ class UneImage extends JButton implements MouseListener {
 
     private int indice;
 
+    private  Timer timer;
+
+    private boolean etatAffichage = false;
+
     public UneImage(int indice) {
         this.indice = indice;
 
         setIcon(TABIMAGES[7]);
+
+        timer = new Timer(200, this);
+
         addMouseListener(this);
+    }
+
+    @Override 
+    public void actionPerformed(ActionEvent e) {
+        etatAffichage = !etatAffichage; 
+
+        if (etatAffichage) {
+            setIcon(TABIMAGES[indice]);
+        } else {
+            setIcon(TABIMAGES[5]);
+        }
     }
 
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        setIcon(TABIMAGES[indice]);
+        if (!timer.isRunning()) {
+            setIcon(TABIMAGES[indice]);
+        }
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
+        timer.stop();
         setIcon(TABIMAGES[5]);
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
+        timer.start();
 
     }
 

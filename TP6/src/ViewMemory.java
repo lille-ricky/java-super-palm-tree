@@ -3,7 +3,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-
+/**
+ * Classe en charge du vue du jeu 
+ */
 public class ViewMemory {
     private ModeleMemory modele;
     private JFrame frame;
@@ -29,12 +31,18 @@ public class ViewMemory {
      * Initialise l'interface graphique.
      */
     private void initialiserInterface() {
+        // L'entete du programme
         frame = new JFrame("Jeu de Memory");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
 
         JMenuBar menuBar = new JMenuBar();
 
+        /**
+         * Le menu du jeu, qui contient les options de : 
+         * - Commencer une nouvelle partie
+         * - Quitter le jeu
+         */
         JMenu jeuMenu = new JMenu("Jeu");
         JMenuItem nouvellePartieItem = new JMenuItem(new RecommencerAction("Nouvelle partie", null, this));
         JMenuItem quitterItem = new JMenuItem(new QuitterAction("Quitter", null));
@@ -42,6 +50,9 @@ public class ViewMemory {
         jeuMenu.add(quitterItem);
         menuBar.add(jeuMenu);
 
+        /**
+         * Le menu a propos qui donne les informations generales du projet
+         */
         JMenu aideMenu = new JMenu("Aide");
         JMenuItem aProposItem = new JMenuItem(new AProposAction("À propos...", null, frame));
         aideMenu.add(aProposItem);
@@ -49,6 +60,9 @@ public class ViewMemory {
 
         frame.setJMenuBar(menuBar);
 
+        /**
+         * Le panel des cartes
+         */
         JPanel cardPanel = new JPanel(new GridLayout(2, modele.getCartes().size() / 2));
         frame.add(cardPanel, BorderLayout.CENTER);
 
@@ -85,7 +99,11 @@ public class ViewMemory {
 
         timer.setRepeats(false);
 
-        frame.setSize(1920, 1080);
+        // Fait en sorte de definir la taille du JFrame par rapport au ecran
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension screenSize = tk.getScreenSize();
+
+        frame.setSize(screenSize);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }

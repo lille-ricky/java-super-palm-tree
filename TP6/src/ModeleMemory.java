@@ -1,7 +1,9 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
+/**
+ * Classe en charge du modele du jeu 
+ */
 public class ModeleMemory {
     private List<Carte> cartes;
     private int pairesRestantes;

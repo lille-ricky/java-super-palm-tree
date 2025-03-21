@@ -25,6 +25,9 @@ public class Bille {
      * definie la couelur
      */
     public void setCouleur(int couleur) {
+        if (couleur < -1) {
+            throw new IllegalArgumentException("Invalid color");
+        }
         this.couleur = couleur;
         this.vide = (couleur == -1);
     }

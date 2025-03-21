@@ -1,3 +1,6 @@
+/**
+ * Une carte du jeu
+ */
 public class Carte {
     private String valeur; // L'image représentée sur la carte
     private boolean estVisible; // true si la carte est face visible, false sinon

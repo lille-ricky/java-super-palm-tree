@@ -12,7 +12,7 @@ public class MonJeu implements IJeuDesBilles {
     private Bille[][] grille;
     private Random random;
     private static final int VIDE = -1;
-    private static final int TAILLE_GRILLE = 3; // A remettre a 9 apres le debeuggage
+    private static final int TAILLE_GRILLE = 9; 
     private static final int COUNT_COULEURS = 8; 
     private static final int NB_BILLES_ALIGNEES = 3; // Rappel :remets le a 5 apres les tests mon gros
     private List<Point> lastModified = new ArrayList<>();
@@ -21,6 +21,7 @@ public class MonJeu implements IJeuDesBilles {
     public MonJeu() {
         grille = new Bille[TAILLE_GRILLE][TAILLE_GRILLE];
         random = new Random();
+        System.out.println("Grid size: " + TAILLE_GRILLE + "x" + TAILLE_GRILLE);
         reinit();
     }
 
@@ -58,7 +59,6 @@ public class MonJeu implements IJeuDesBilles {
     public int getScore() {
         return score;
     }
-
     /**
      * Renvoie le nombre de couleurs
      */
@@ -101,10 +101,11 @@ public class MonJeu implements IJeuDesBilles {
     @Override
     public void reinit() {
         lastModified.clear();
-
+        System.out.println("Grid initialized with " + TAILLE_GRILLE + "x" + TAILLE_GRILLE + " cells.");
         for (int i = 0; i < TAILLE_GRILLE; i++) {
             for (int j = 0; j < TAILLE_GRILLE; j++) {
                 grille[i][j] = new Bille();
+                System.out.println("Cell (" + i + ", " + j + "): " + grille[i][j].getCouleur());
             }
         }
         ajouteBilles(5);
@@ -173,7 +174,7 @@ public class MonJeu implements IJeuDesBilles {
     private boolean isValidMove(int srcX, int srcY, int destX, int destY) {
         if (srcX < 0 || srcX >= TAILLE_GRILLE || srcY < 0 || srcY >= TAILLE_GRILLE ||
             destX < 0 || destX >= TAILLE_GRILLE || destY < 0 || destY >= TAILLE_GRILLE || 
-            grille[srcX][srcY].estVide() || grille[destX][destY].estVide()) {
+            grille[srcX][srcY].estVide() || !grille[destX][destY].estVide()) {
             return false;
         }
         return findPath(srcX, srcY, destX, destY); 
